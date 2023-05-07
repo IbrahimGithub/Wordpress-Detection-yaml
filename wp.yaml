@@ -1,0 +1,29 @@
+
+info:
+  name: WordPress 6.1.1 - XSS
+  author: leetninja
+  severity: medium
+  reference:
+    - Me
+  metadata:
+    verified: "true"
+    shodan-query: html:"wordpress"
+  tags: wp,wordpress,cloudflare
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/wp-login.php"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - 'wp-login.php'
+          - 'wordpress'
+        condition: and
+
+      - type: status
+        status:
+          - 200
