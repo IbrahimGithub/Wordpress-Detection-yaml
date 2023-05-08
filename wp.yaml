@@ -1,10 +1,11 @@
+id: wp-cloudflare-xss
 
 info:
   name: WordPress 6.1.1 - XSS
-  author: leetninja
+  author: SSkylinearafat
   severity: medium
   reference:
-    - Me
+    - https://twitter.com/SSkylinearafat/status/1653665906294415360?s=20
   metadata:
     verified: "true"
     shodan-query: html:"wordpress"
@@ -13,14 +14,14 @@ info:
 http:
   - method: GET
     path:
-      - "{{BaseURL}}/wp-login.php"
+      - "{{BaseURL}}/wp-login.php?"
 
     matchers-condition: and
     matchers:
       - type: word
         part: body
         words:
-          - 'wp-login.php'
+          - '<html lang="en-US" #039;accesskey=X Only=1 OnMouseOver=alert(1)//as'
           - 'wordpress'
         condition: and
 
